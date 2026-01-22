@@ -1,0 +1,15 @@
+# 3XPO::3D
+# 3XPO::VISUAL
+
+3XPO.Init()
+3XPO.EnableVegetation(true)
+3XPO.EnableWater(true)
+3XPO.EnableTrees(true)
+
+3XPO.BindScene("3DScene")
+3XPO.BindMemory("BNM")
+3XPO.BindGPU("Xc")
+3XPO.BindGraphics("DFHP")
+
+3XPO.LoadAssets("Assets/Trees", "Assets/Grass", "Assets/Water")
+3XPO.Ready()

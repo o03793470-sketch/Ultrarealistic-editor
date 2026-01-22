@@ -1,0 +1,20 @@
+GPU.Init()
+
+GPU.Device("DirectX12")
+GPU.Async(true)
+GPU.Compute(true)
+
+GPU.LoadSimulation("Fluid")
+GPU.LoadSimulation("Cloth")
+GPU.LoadSimulation("Gas")
+
+GPU.Bind.Scene("3DScene")
+GPU.Bind.Render("RayTracing")
+
+GPU.Schedule(
+    FluidSim,
+    ClothSim,
+    GasSim
+)
+
+GPU.Commit()

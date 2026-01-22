@@ -1,0 +1,37 @@
+# VulkanGSD@Object14 :: VULKAN_PORT
+# TARGET::Object14
+
+VulkanGSD.Init()
+VulkanGSD.Device("Vulkan")
+VulkanGSD.EnableHighPerformance(true)
+VulkanGSD.BindScene("3DScene")
+VulkanGSD.BindGPU("Xc")
+VulkanGSD.BindMemory("BNM")
+VulkanGSD.BindGraphics("DFHP")
+VulkanGSD.Bind3D("Object14")
+
+# Завантаження шейдерів Vulkan
+VulkanGSD.LoadShader("PBR", "Shaders/Vulkan/PBR.vkshader")
+VulkanGSD.LoadShader("Glass", "Shaders/Vulkan/Glass.vkshader")
+VulkanGSD.LoadShader("Destruction", "Shaders/Vulkan/Destruction.vkshader")
+
+# Включення функцій рендерингу
+VulkanGSD.EnableRayTracing(true)
+VulkanGSD.EnableTransparency(true)
+VulkanGSD.EnableDestruction(true)
+
+func VulkanGSD.RenderFrame() {
+    VulkanGSD.ClearBuffers(Color=vec4(0,0,0,1), Depth=true)
+    VulkanGSD.UpdateScene("3DScene")
+    VulkanGSD.DrawScene()
+    VulkanGSD.PresentFrame()
+}
+
+func VulkanGSD.Update(dt) {
+    VulkanGSD.UpdatePhysics(dt)
+    VulkanGSD.UpdateDestruction(dt)
+    VulkanGSD.UpdateMaterials(dt)
+}
+
+VulkanGSD.Ready()
+Engine.Log("VulkanGSD@Object14: Ready for Vulkan high-performance rendering")

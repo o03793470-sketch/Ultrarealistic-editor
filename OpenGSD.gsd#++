@@ -1,0 +1,67 @@
+# OpenGSD::GRAPHICS
+# OpenGSD::LIBRARY
+# OpenGSD::OPENGL_PORT
+
+OpenGSD = new GraphicsEngine()
+
+# --- Ініціалізація OpenGL порту ---
+OpenGSD.Device = "OpenGL"
+OpenGSD.Context = GL.CreateContext()
+OpenGSD.Enable(VSync, true)
+OpenGSD.Enable(Transparency, true)
+OpenGSD.Enable(Destruction, true)
+OpenGSD.Enable(GlassMaterials, true)
+OpenGSD.SetRenderQuality("Ultra")
+OpenGSD.SetAntiAliasing(8)
+
+# --- Підключення сцени і модулів ---
+OpenGSD.BindScene("3DScene")
+OpenGSD.BindGPU("Xc")
+OpenGSD.BindMemory("BNM")
+OpenGSD.BindGraphics("DFHP")
+OpenGSD.Bind3D("3XPO")
+
+# --- Завантаження шейдерів і ресурсів ---
+OpenGSD.LoadShader("Glass", "Shaders/Glass.gsdshader")
+OpenGSD.LoadShader("Destruction", "Shaders/Destruction.gsdshader")
+OpenGSD.LoadShader("Reflection", "Shaders/Reflection.gsdshader")
+OpenGSD.LoadShader("Refraction", "Shaders/Refraction.gsdshader")
+
+OpenGSD.LoadMaterial("Glass", "Materials/Glass.mat")
+OpenGSD.LoadMaterial("Concrete", "Materials/Concrete.mat")
+OpenGSD.LoadMaterial("Wood", "Materials/Wood.mat")
+OpenGSD.LoadMaterial("Metal", "Materials/Metal.mat")
+
+OpenGSD.LoadTexture("Glass", "Textures/Glass.dds")
+OpenGSD.LoadTexture("Concrete", "Textures/Concrete.dds")
+OpenGSD.LoadTexture("Wood", "Textures/Wood.dds")
+OpenGSD.LoadTexture("Metal", "Textures/Metal.dds")
+
+# --- Налаштування ефектів руйнування ---
+OpenGSD.Destruction.EnablePhysics(true)
+OpenGSD.Destruction.SetFractureCount(32)
+OpenGSD.Destruction.SetDebrisLifetime(10.0)
+OpenGSD.Destruction.BindSceneObjects("3DScene")
+
+# --- Прив’язка рендеринга до GPU ---
+OpenGSD.BindComputeBuffers("Xc", ["FluidSim", "ClothSim", "GasSim"])
+OpenGSD.BindRayTracing("DFHP")
+
+# --- Основні методи бібліотеки ---
+func OpenGSD.RenderFrame() {
+    OpenGSD.ClearBuffers(Color=vec4(0.0,0.0,0.0,1.0), Depth=true)
+    OpenGSD.UpdateScene("3DScene")
+    OpenGSD.DrawScene()
+    OpenGSD.PresentFrame()
+}
+
+func OpenGSD.Update(dt) {
+    OpenGSD.UpdatePhysics(dt)
+    OpenGSD.UpdateDestruction(dt)
+    OpenGSD.UpdateMaterials(dt)
+    OpenGSD.UpdateTransparency(dt)
+}
+
+# --- Завершальна підготовка бібліотеки ---
+OpenGSD.Ready()
+Engine.Log("OpenGSD: Ready for rendering transparent objects and destruction effects")

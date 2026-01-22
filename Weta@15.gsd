@@ -1,0 +1,42 @@
+# Weta@15 :: ULTRA_REALISTIC_3D
+# VERSION::15
+
+Weta.Init()
+Weta.BindScene("3DScene")
+Weta.BindGPU("Xc")
+Weta.BindMemory("BNM")
+Weta.BindGraphics("DFHP")
+Weta.Bind3D("Object14")
+Weta.BindVulkan("VulkanGSD")
+
+# Ультра реалістичні ефекти
+Weta.EnableRayTracing(true)
+Weta.EnableGlobalIllumination(true)
+Weta.EnableSubsurfaceScattering(true)
+Weta.EnableHighResTextures(true)
+Weta.EnableDynamicShadows(true)
+Weta.EnableVegetation(true)
+Weta.EnableWaterSimulation(true)
+Weta.EnableDestruction(true)
+
+# Завантаження моделей та текстур
+Weta.LoadModel("Assets/Weta15/Characters.obj")
+Weta.LoadModel("Assets/Weta15/Environment.obj")
+Weta.LoadTextures("Assets/Weta15/Textures/")
+
+func Weta.RenderFrame() {
+    Weta.ClearBuffers(Color=vec4(0,0,0,1), Depth=true)
+    Weta.UpdateScene("3DScene")
+    Weta.DrawScene()
+    Weta.PresentFrame()
+}
+
+func Weta.Update(dt) {
+    Weta.UpdatePhysics(dt)
+    Weta.UpdateVegetation(dt)
+    Weta.UpdateWater(dt)
+    Weta.UpdateDestruction(dt)
+}
+
+Weta.Ready()
+Engine.Log("Weta@15: Ultra-realistic 3D graphics ready")

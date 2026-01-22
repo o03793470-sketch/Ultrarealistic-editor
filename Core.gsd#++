@@ -1,0 +1,22 @@
+# CORE::ENGINE
+# CORE::LIBRARIES
+
+Core.Init()
+
+Core.Bind.World()
+Core.Bind.Scene("3DScene")
+Core.Bind.Render("SPUIP")
+Core.Bind.Simulation("Xc")
+Core.Bind.Memory("BNM")
+
+Core.Enable(
+    Physics,
+    Animation,
+    Rigging,
+    Scripting,
+    Multiplayer,
+    UI,
+    RayTracing
+)
+
+Core.Ready()

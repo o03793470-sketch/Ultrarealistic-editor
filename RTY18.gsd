@@ -1,0 +1,20 @@
+# RTY18 :: RTX_SUPPORT
+
+RTX.Init()
+RTX.EnableRayTracing(true)
+RTX.EnableDLSS(true)
+RTX.BindScene("3DScene")
+RTX.BindGPU("Xc")
+RTX.BindGraphics("DFHP")
+
+RTX.SetMaxBounces(5)
+RTX.SetReflections(true)
+RTX.SetRefractions(true)
+
+func RTX.Render() {
+    RTX.CalculateRays()
+    RTX.ApplyRTXEffects()
+}
+
+RTX.Ready()
+Engine.Log("RTY18: RTX ready")

@@ -1,0 +1,17 @@
+Memory.Init()
+
+Memory.Mode("Persistent")
+Memory.Store("WorldMaps")
+Memory.Store("UserAssets")
+Memory.Store("GeneratedTerrain")
+Memory.Store("Characters")
+Memory.Store("Animations")
+
+Memory.AutoSave(true)
+Memory.AutoSaveInterval(120)
+
+Memory.Bind("ExperimentalTools")
+Memory.Bind("CSRPT")
+Memory.Bind("GSPO")
+
+Memory.Ready()

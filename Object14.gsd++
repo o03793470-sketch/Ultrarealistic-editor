@@ -1,0 +1,21 @@
+# Object14 :: PHOTOREALISTIC_3D
+
+Object14.Init()
+Object14.EnablePBR(true)
+Object14.EnableSubsurfaceScattering(true)
+Object14.EnableHighResTextures(true)
+Object14.BindScene("3DScene")
+Object14.BindGraphics("DFHP")
+Object14.BindGPU("Xc")
+
+Object14.LoadModel("Assets/HighResCharacter.obj")
+Object14.LoadModel("Assets/Environment.obj")
+Object14.LoadTextures("Assets/Textures/")
+
+func Object14.Render() {
+    Object14.UpdateMaterials()
+    Object14.Draw()
+}
+
+Object14.Ready()
+Engine.Log("Object14: Photorealistic 3D ready")

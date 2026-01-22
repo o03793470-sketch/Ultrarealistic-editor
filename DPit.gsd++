@@ -1,0 +1,16 @@
+# DPit :: SHADOWS
+
+DPit.Init()
+DPit.EnableShadows(true)
+DPit.SetShadowResolution(4096)
+DPit.BindScene("3DScene")
+DPit.BindGPU("Xc")
+DPit.BindGraphics("DFHP")
+
+func DPit.Update() {
+    DPit.CalculateShadows()
+    DPit.UpdateLighting()
+}
+
+DPit.Ready()
+Engine.Log("DPit: Shadows system ready")

@@ -1,0 +1,100 @@
+# DERT.gsd++ :: FULL_ENGINE
+# DESCRIPTION::Complete GSD++ engine core with all modules integrated (without dpwospwpwlw@13)
+
+Engine.Init()
+Engine.BindScene("3DScene")
+Engine.BindGPU("Xc")
+Engine.BindMemory("BNM")
+Engine.BindGraphics("DFHP")
+
+# ────────────── LOAD CORE MODULES ──────────────
+Engine.Include("Core.gsd#++")
+Engine.Include("Xc.gsd++")
+Engine.Include("DFHP.gsd#++")
+Engine.Include("3XPO.gsd++")
+Engine.Include("OpenGSD.gsd#++")
+Engine.Include("dpwospwpwlw.gsd@12")       # залишаємо тільки @12
+Engine.Include("Object14.gsd++")
+Engine.Include("RTY18.gsd")
+Engine.Include("DPit.gsd++")
+Engine.Include("ObjectLighting.gsd++")
+Engine.Include("Nodes.gsd@13")
+Engine.Include("VulkanGSD.gsd@Object14")
+Engine.Include("SDPI.gsd@Weta15")
+Engine.Include("Weta@15.gsd")
+Engine.Include("Xcpw.gsd++")
+Engine.Include("Xcvb.gsd@Weta15++")
+
+# ────────────── INITIALIZE MODULES ──────────────
+Core.Init()
+Xc.Init()
+DFHP.Init()
+3XPO.Init()
+OpenGSD.Init()
+dpwospwpwlw@12.Init()
+Object14.Init()
+RTY18.Init()
+DPit.Init()
+ObjectLighting.Init()
+Nodes@13.Init()
+VulkanGSD@Object14.Init()
+SDPI@Weta15.Init()
+Weta@15.Init()
+Xcpw.Init()
+Xcvb@Weta15++.Init()
+
+# ────────────── LINK MODULES ──────────────
+Engine.BindModule(Core)
+Engine.BindModule(Xc)
+Engine.BindModule(DFHP)
+Engine.BindModule(3XPO)
+Engine.BindModule(OpenGSD)
+Engine.BindModule(dpwospwpwlw@12)
+Engine.BindModule(Object14)
+Engine.BindModule(RTY18)
+Engine.BindModule(DPit)
+Engine.BindModule(ObjectLighting)
+Engine.BindModule(Nodes@13)
+Engine.BindModule(VulkanGSD@Object14)
+Engine.BindModule(SDPI@Weta15)
+Engine.BindModule(Weta@15)
+Engine.BindModule(Xcpw)
+Engine.BindModule(Xcvb@Weta15++)
+
+# ────────────── ENGINE SETTINGS ──────────────
+Engine.EnableRayTracing(true)
+Engine.EnableGlobalIllumination(true)
+Engine.EnableUltraRealisticLighting(true)
+Engine.EnableSubsurfaceScattering(true)
+Engine.EnableVegetation(true)
+Engine.EnableWaterSimulation(true)
+Engine.EnableDestruction(true)
+Engine.EnableProceduralNodes(true)
+Engine.EnableDLSS(true)
+Engine.EnableMotionBlur(true)
+Engine.EnableVolumetricFog(true)
+Engine.EnableCaustics(true)
+Engine.EnableFilmGrain(true)
+Engine.EnableAdvancedReflections(true)
+
+# ────────────── MAIN LOOP ──────────────
+func Engine.MainLoop(dt) {
+    # Update modules
+    dpwospwpwlw@12.Update(dt)
+    Object14.Render()
+    RTY18.Render()
+    DPit.Update()
+    ObjectLighting.Update(dt)
+    Nodes@13.Update(dt)
+    VulkanGSD@Object14.RenderFrame()
+    SDPI@Weta15.RenderFrame()
+    Weta@15.RenderFrame()
+    Xcpw.Update(dt)
+    Xcvb@Weta15++.RenderFrame()
+    
+    # Present frame
+    Engine.Present()
+}
+
+Engine.Ready()
+Engine.Log("DERT.gsd++: Full GSD++ engine initialized and ready (without dpwospwpwlw@13)")

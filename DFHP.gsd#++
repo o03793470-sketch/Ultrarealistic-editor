@@ -1,0 +1,13 @@
+# DFHP::GRAPHICS
+# DFHP::LIBRARY
+
+DFHP.Init()
+DFHP.EnableRayTracing(true)
+DFHP.SetRenderQuality("Ultra")
+DFHP.LoadShaders("Shaders/RayTracing")
+
+DFHP.BindScene("3DScene")
+DFHP.BindMemory("BNM")
+DFHP.BindGPU("Xc")
+
+DFHP.Ready()

@@ -1,0 +1,19 @@
+# ObjectLighting :: OBJECT_LIGHTS
+
+ObjectLighting.Init()
+ObjectLighting.EnablePointLights(true)
+ObjectLighting.EnableSpotLights(true)
+ObjectLighting.EnableDirectionalLights(true)
+ObjectLighting.BindScene("3DScene")
+ObjectLighting.BindGraphics("DFHP")
+
+ObjectLighting.LoadLight("Sun", Type=Directional, Intensity=1.0)
+ObjectLighting.LoadLight("Lamp", Type=Point, Position=vec3(5,2,3), Intensity=0.8)
+
+func ObjectLighting.Update(dt) {
+    ObjectLighting.UpdateLights(dt)
+    ObjectLighting.ApplyToScene()
+}
+
+ObjectLighting.Ready()
+Engine.Log("ObjectLighting: Object lighting ready")

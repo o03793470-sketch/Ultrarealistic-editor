@@ -1,0 +1,33 @@
+# SDPI@Weta15 :: HIGH_END_3D_GRAPHICS
+
+SDPI.Init()
+SDPI.BindScene("3DScene")
+SDPI.BindGPU("Xc")
+SDPI.BindMemory("BNM")
+SDPI.BindGraphics("DFHP")
+SDPI.EnableUltraRealisticLighting(true)
+SDPI.EnableGlobalIllumination(true)
+SDPI.EnableHighResTextures(true)
+SDPI.EnableSubsurfaceScattering(true)
+SDPI.EnableVegetation(true)
+SDPI.EnableWaterSimulation(true)
+
+# Завантаження ресурсів Weta15
+SDPI.LoadModel("Assets/Weta15/Characters.obj")
+SDPI.LoadModel("Assets/Weta15/Environment.obj")
+SDPI.LoadTextures("Assets/Weta15/Textures/")
+
+func SDPI.RenderFrame() {
+    SDPI.UpdateMaterials()
+    SDPI.UpdateVegetation()
+    SDPI.DrawScene()
+}
+
+func SDPI.Update(dt) {
+    SDPI.UpdatePhysics(dt)
+    SDPI.UpdateWater(dt)
+    SDPI.UpdateVegetation(dt)
+}
+
+SDPI.Ready()
+Engine.Log("SDPI@Weta15: Ultra-realistic 3D ready")

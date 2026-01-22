@@ -1,0 +1,22 @@
+# Nodes@13 :: PROCEDURAL_NODES
+# VERSION::13
+
+Nodes.Init()
+Nodes.EnableProcedural(true)
+Nodes.BindScene("3DScene")
+Nodes.BindGraphics("3XPO")
+Nodes.BindGPU("Xc")
+
+# Створення базових нодів
+Nodes.AddNode("Noise", Type=Texture)
+Nodes.AddNode("Displacement", Type=Modifier)
+Nodes.AddNode("Scatter", Type=ObjectDistribution)
+Nodes.AddNode("Curve", Type=AnimationPath)
+
+func Nodes.Update(dt) {
+    Nodes.ProcessAll()
+    Nodes.ApplyToScene()
+}
+
+Nodes.Ready()
+Engine.Log("Nodes@13: Procedural nodes ready")

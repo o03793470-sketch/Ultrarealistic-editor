@@ -1,0 +1,24 @@
+# dpwospwpwlw@12 :: HEAVY_SIM
+# VERSION::12
+
+Sim.Init()
+Sim.EnablePhysics(true)
+Sim.EnableCloth(true)
+Sim.EnableFluid(true)
+Sim.EnableDestruction(true)
+Sim.SetMaxObjects(1024)
+Sim.SetMaxParticles(500000)
+
+Sim.BindGPU("Xc")
+Sim.BindMemory("BNM")
+Sim.BindScene("3DScene")
+
+func Sim.Update(dt) {
+    Sim.UpdatePhysics(dt)
+    Sim.UpdateDestruction(dt)
+    Sim.UpdateCloth(dt)
+    Sim.UpdateFluid(dt)
+}
+
+Sim.Ready()
+Engine.Log("dpwospwpwlw@12: Ready for heavy simulations")

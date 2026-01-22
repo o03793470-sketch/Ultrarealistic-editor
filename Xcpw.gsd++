@@ -1,0 +1,35 @@
+# Xcpw :: GAME_STATS_MONITOR
+
+Xcpw.Init()
+Xcpw.BindScene("3DScene")
+Xcpw.BindGPU("Xc")
+Xcpw.BindMemory("BNM")
+Xcpw.BindGraphics("DFHP")
+Xcpw.EnableRealtimeStats(true)
+
+# Відслідковування продуктивності
+Xcpw.MonitorFPS(true)
+Xcpw.MonitorCPU(true)
+Xcpw.MonitorGPU(true)
+Xcpw.MonitorMemory(true)
+Xcpw.MonitorPhysicsLoad(true)
+Xcpw.MonitorNetwork(true)
+
+# Збір даних про об’єкти
+Xcpw.TrackObjects(true)
+Xcpw.TrackMaterials(true)
+Xcpw.TrackLights(true)
+Xcpw.TrackShaders(true)
+
+func Xcpw.Update(dt) {
+    Xcpw.UpdatePerformance(dt)
+    Xcpw.UpdateSceneStats(dt)
+    Xcpw.LogRealtimeStats()
+}
+
+func Xcpw.GetSummary() {
+    return Xcpw.GenerateReport()
+}
+
+Xcpw.Ready()
+Engine.Log("Xcpw: Game stats monitoring ready")
