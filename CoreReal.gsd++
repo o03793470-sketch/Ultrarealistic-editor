@@ -1,0 +1,68 @@
+# ============================
+# Реальний скрипт ядра GSD++
+# ============================
+
+# --- Генерація світу ---
+World.Generate(987654)
+World.SetWeather("Rain")
+World.SetTimeOfDay(14, 30)
+
+# --- Персонажі ---
+Character.Create("Hero")
+Character.SetPosition("Hero", 10, 0, 5)
+Character.SetHealth("Hero", 100)
+Character.SetInventory("Hero", ["Sword", "Shield", "Potion"])
+
+Character.Create("Villager1")
+Character.SetPosition("Villager1", 15, 0, 8)
+Character.SetBehavior("Villager1", "WalkAround")
+
+Character.Create("Villager2")
+Character.SetPosition("Villager2", 20, 0, 12)
+Character.SetBehavior("Villager2", "Idle")
+
+# --- Тварини ---
+Animal.Spawn("Wolf", 50, 50)
+Animal.SetBehavior("Wolf", "Aggressive")
+
+Animal.Spawn("Deer", 60, 45)
+Animal.SetBehavior("Deer", "Flee")
+
+Animal.Spawn("Bird", 5, 30)
+Animal.SetBehavior("Bird", "Fly")
+
+# --- Предмети ---
+Item.Create("Sword", 12, 0, 5)
+Item.Create("Shield", 14, 0, 5)
+Item.Create("Potion", 11, 0, 6)
+Item.SetProperty("Potion", "HealAmount", 50)
+
+# --- Блоки та зони ---
+Game.CreateBlock("StoneWall", 5, 0, 5)
+Game.CreateZone("SafeZone", 0, 0, 0, 20, 20, 20)
+
+# --- Ландшафт і природа (Experimental Tools) ---
+Tool.DrawTerrain("Mountain", 0, 0, 0, 100, 50)
+Tool.SpawnTree("Oak", 10, 0, 10)
+Tool.SpawnAnimal("Bear", 30, 30)
+
+# --- UI та контролери ---
+UI.Create("MainHUD")
+UI.AddButton("MainHUD", "Inventory")
+UI.AddController("Hero", "PlayerController")
+
+# --- Мультиплеєр ---
+Multiplayer.AddPlayer("Player2")
+Multiplayer.SetPosition("Player2", 5, 0, 5)
+Multiplayer.SyncInventory("Player2", ["Sword", "Potion"])
+
+# --- Реалістичний рендер (SPUIP) ---
+Render.EnableRayTracing(true)
+Render.SetDepthMaps(4)
+Render.EnableRealisticShadows(true)
+Render.SetGlobalIllumination(true)
+
+# --- Сценарії та анімації ---
+Animation.Play("Hero", "Walk", loop=true)
+Animation.Play("Villager1", "Talk", loop=false)
+Animation.SetRig("Hero", "FullRig")
