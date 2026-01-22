@@ -1,0 +1,59 @@
+# VbP.gsd@8.4 для GSD++
+
+module VbP {
+    // Структура текстури
+    struct Texture {
+        id : int
+        filepath : string
+        width : int
+        height : int
+    }
+
+    // Словник текстур
+    textures : dict<int, Texture> = {}
+
+    // Генератор ID
+    nextTextureID : int = 1
+
+    // Функція завантаження текстури
+    func LoadTexture(filepath : string) -> int {
+        t : Texture
+        t.id = nextTextureID
+        t.filepath = filepath
+        t.width = 1024
+        t.height = 1024
+
+        textures[nextTextureID] = t
+        nextTextureID += 1
+
+        print("VbP: Loaded texture " + filepath + " with ID " + t.id)
+        return t.id
+    }
+
+    // Прив'язка Normal Map до об'єкта
+    func BindNormalMap(textureID : int, objectName : string) {
+        if textures.contains(textureID) {
+            print("VbP: Normal Map " + textures[textureID].filepath +
+                  " bound to object " + objectName)
+        } else {
+            print("VbP: Texture ID not found!")
+        }
+    }
+
+    // Малювання полігону з текстурою
+    func DrawPolygon(textureID : int, vertices : list<float>) {
+        if textures.contains(textureID) {
+            print("VbP: Drawing polygon with texture " + textures[textureID].filepath)
+        } else {
+            print("VbP: Texture ID not found for drawing!")
+        }
+    }
+
+    // Видалення текстури
+    func DeleteTexture(textureID : int) {
+        if textures.contains(textureID) {
+            print("VbP: Deleted texture " + textures[textureID].filepath)
+            textures.remove(textureID)
+        }
+    }
+}
